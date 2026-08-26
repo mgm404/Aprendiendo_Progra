@@ -1,0 +1,13 @@
+1. INICIO
+2. Abrir YouTube:
+	1.Si esta en celular o tableta o televisión inteligente:
+		1.Buscar aplicación de YouTube:
+			1.Si no tiene YouTube instalado:
+				1.Instalar YouTube
+		2. Abrir aplicación de YouTube
+	2.Sino, si esta en computadora o laptop:
+		1.Abrir el buscador web
+		2.Buscar YouTube en el buscador
+		3.Abrir el link de youtube.com
+3.Darle click a alguno de los videos en YouTube
+4. FIN

@@ -1,0 +1,52 @@
+1. INICIO
+2. Despertar:
+	1. Si con mucho sueño:
+		1. Volver a dormir
+	2. Sino, si antes de las 7am:
+		2. Volver a dormir
+	3. Sino, si con energía:
+		3. Tontear en la cama hasta despertar bien
+3. Tirar peluche de gato de la cama
+4. Poner tableta cerca de las escaleras de la cama
+5. Bajar de la cama y poner tableta en escritorio
+6. Ir al baño
+7. Ir por desayuno:
+	1. Si lunes o martes o miércoles o jueves o domingo:
+		1. Desayuno es normal
+	2. Sino, si viernes:
+		1. Desayuno es cereal
+	3. Sino, si es sábado:
+		1. Desayuno es pancakes
+8. Comer desayuno
+9. Ir a cuarto y tontear por un rato
+10. Ir a baño y bañarse
+11. Ir a escritorio:
+	1. Si es fin de semana:
+		1. Jugar Videojuegos o dibujar o ver videos de YouTube
+	2.Si es entre semana:
+		1. Estudiar Lyfter
+		2. Si con energía:
+			3. Trabajar en videojuego o cómic o videos
+		3. Sino, si sin energía:
+			1. Jugar Videojuegos o ver videos de YouTube
+12. Ir por almuerzo
+13. Comer almuerzo
+14. Ir a escritorio:
+	1. Si con energía:
+		3. Trabajar en videojuego o cómic o videos
+	2. Sino, si sin energía:
+		1. Jugar Videojuegos o ver videos de YouTube o ver anime
+15. Ir por cena
+16. Si viendo c-drama:
+	1. Comer viendo c-drama
+17.Sino:
+	1.Comer cena
+18. Ir a escritorio:
+	1. Si con energía:
+		3. Trabajar en videojuego o cómic o videos
+	2. Sino, si sin energía:
+		1. Jugar Videojuegos o ver videos de YouTube o ver anime
+
+19. Subir peluche y tablet a la cama
+20. SUbir a la cama y dormir
+21. FIN
