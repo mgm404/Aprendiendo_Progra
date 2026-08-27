@@ -4,7 +4,7 @@ import os
 import time
 
 def menu():
-    student_data= data.read_student_data
+    student_data= data.read_student_data #importa la info de estudiantes (si no existe bloquea opciones)
     select=0
 
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -12,7 +12,7 @@ def menu():
     print("++++++++++++++++++++++++++++++++++++++++++++++ \n+++++++++++ Control de estudiantes +++++++++++ \n++++++++++++++++++++++++++++++++++++++++++++++ \n++++++++++                          ++++++++++ \n+++         ¿Que quiere hacer hoy?         +++")
 
 
-    if student_data==None:
+    if student_data==None: #Cambia el texto dependiendo de si hay registro o no
         print("\n+ 1. Ingresar información de los estudiantes \n+ *2. Ver información de los estudiantes \n+ *3. Ver las top 3 notas promedio  \n+ *4. Ver las notas promedio generales")
         print("\n++ OPCIÓNES 2-4 INVÁLIDAS  \n+ (no hay registro de estudiantes previo)")
     else:
@@ -21,7 +21,7 @@ def menu():
     try:
         select=int(input("++++ Selección: "))
 
-        if student_data==None and select!=1:
+        if student_data==None and select!=1: #Sin registro solo queda la opción 1
             raise ValueError()
         elif select<1 or select>4:
             raise ValueError()
@@ -33,14 +33,15 @@ def menu():
 
     match select:
         case 1: #Ingresar info de estudiantes
-            actions.student_info
+            actions.input_students
         case 2: #Ver info de estudiantes (si hay)
             actions.view_student_info
         case 3: #Top 3 mejores notas
             actions.top_three_students
         case 4: #Ver promedios
             actions.view_averages
-        case _:
+        case _: 
+            #Caso vacío por si arriba no funciona el delimitador
             print("+ Selección invalida")
             time.sleep(3)
             menu()

@@ -1,7 +1,4 @@
 import menu
-import os
-import actions
-import data
 
 def main():
     menu.menu
