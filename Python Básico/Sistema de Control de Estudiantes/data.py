@@ -12,13 +12,23 @@ def read_student_data():
 
 
 def save_student_data(students):
+    file_exists=read_student_data() #Confirma si ya existe o no 
+
     student_data=Path(__file__).parent / 'student_data.csv'
 
-    with open(student_data, 'w', encoding='utf-8', newline='') as csvfile:
-        headers = students[0].keys()
+    if file_exists==None:
+        with open(student_data, 'w', encoding='utf-8', newline='') as csvfile:
+            headers = students[0].keys()
 
-        writer = csv.DictWriter(csvfile, fieldnames=headers, delimiter='\t') #**\t es tab
+            writer = csv.DictWriter(csvfile, fieldnames=headers, delimiter='\t') #**\t es tab
 
-        writer.writeheader()
+            writer.writeheader()
 
-        writer.writerows(students)
+            writer.writerows(students)
+
+    else:
+        with open(student_data, 'a', encoding='utf-8', newline='') as csvfile:
+        
+            writer = csv.DictWriter(csvfile, delimiter='\t') #**\t es tab
+        
+            writer.writerows(students)

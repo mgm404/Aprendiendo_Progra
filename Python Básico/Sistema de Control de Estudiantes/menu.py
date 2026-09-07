@@ -33,13 +33,13 @@ def menu():
 
     match select:
         case 1: #Ingresar info de estudiantes
-            actions.input_students
+            actions.input_students()
         case 2: #Ver info de estudiantes (si hay)
-            actions.view_student_info
+            actions.view_student_info()
         case 3: #Top 3 mejores notas
-            actions.top_three_students
+            actions.top_three_students()
         case 4: #Ver promedios
-            actions.view_averages
+            actions.view_averages()
         case _: 
             #Caso vacío por si arriba no funciona el delimitador
             print("+ Selección invalida")

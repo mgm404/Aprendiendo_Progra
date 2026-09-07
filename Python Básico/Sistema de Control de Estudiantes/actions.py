@@ -1,7 +1,11 @@
 import data
 import time
 import os
+import menu
+import operator
+import csv
 
+## Acciones de guardar info de estudiantes
 
 def input_students():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -49,9 +53,8 @@ def student_info(amount_of_students):
 
     data.save_student_data(students)
     print("\n+ Se guardo la información de los estudiantes \n	       correctamente!")
-    time.sleep(5)
+    time.sleep(7)
     go_back_menu()
-
 
 def student_grades(grade, class_of_grade):
     while grade<0 or grade>100:
@@ -66,7 +69,52 @@ def student_grades(grade, class_of_grade):
     return grade
 
 
+## Acciones de ver info de estudiantes
+
+def view_student_info():
+    students_data=data.read_student_data() #Agarra la información de los estudiantes
+    student_number=0 #Usado para enumerar los estudiantes
+    exit_info="" #Es lo que hace posible salir de la información e ir a el go_back_menu
+
+    print("++++++++++++++++++++++++++++++++++++++++++++++ \n+++++++++++ Control de estudiantes +++++++++++ \n++++++++++++++++++++++++++++++++++++++++++++++ \n++++++++++                          ++++++++++ \n+++        Registro de estudiantes         +++")
+
+    for student in students_data:
+        student_number+=1
+        print(f"\n+ #{student_number}.\n	Nombre: {student['name']}\n	Clase: {student['student_class']}\n	Nota de Español: {student['spanish_grade']}\n	Nota de Ingles: {student['english_grade']}\n	Nota de Estudios sociales: {student['social_studies_grade']}\n	Nota de Ciencias: {student['science_grade']}\n	Promedio: {student['general_average']}")
+
+    print("\n++ para salir presione q \n+ ")
+
+    while exit_info!="q": #Como exit_info no es q, hace posible esperar hasta que el usuario decida salir :3
+        exit_info=input()
+
+    go_back_menu()
+
+
+
+## Acciones de ver los top 3 promedios
+def top_three_students():
+    students_data=data.read_student_data() #Agarra la información de los estudiantes
+    student_number=0 #Usado para enumerar los estudiantes
+    exit_info="" #Es lo que hace posible salir de la información e ir a el go_back_menu
+
+    
+
+
+
+## Mini menú de salir o volver al menú principal
 
 def go_back_menu():
-    number=0
-    print("hello")
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("\n++++++++++++++++++++++++++++++++++++++++++++++\n\n+++   ¿Quiere volver al menú principal?     ++")
+    re_do=input("\n+ (S/N): ").lower()
+    try:
+        if re_do=="si" or re_do=="s" or re_do=="sí":
+            menu.menu()
+        elif re_do=="no" or re_do=="n":
+            exit()
+        else:
+            raise ValueError()
+    except ValueError as error:
+        print(f"\n+++++++++++++++++++ ERROR ++++++++++++++++++++ \n+    La opción ingresada no es Sí o No       + \n+            Ingreso: {re_do}                + \n+        Ingrese una opción valida           + \n++++++++++++++++++++++++++++++++++++++++++++++ \n+ (si desea salir del programa escoja que no)")
+        time.sleep(5)
+        go_back_menu()
