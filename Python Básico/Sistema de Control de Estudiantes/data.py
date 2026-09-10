@@ -12,7 +12,7 @@ def read_student_data():
     return student_data
 
 def save_student_data(students):
-    file_exists=read_student_data() #Confirma si ya existe o no 
+    file_exists=read_student_data() #Confirms if it exists or not
 
     student_data=Path(__file__).parent / 'student_data.csv'
 
@@ -35,10 +35,10 @@ def save_student_data(students):
             writer.writerows(students)
 
 
-
-def print_full_data(): #imprime la información de todos los estudiantes
+#TODO q sea con la lista
+def print_full_data(): #prints all the student information 
     student_data_original=Path(__file__).parent / 'student_data.csv'
-    student_number=0 #Usado para enumerar los estudiantes
+    student_number=0 #Used to give students a number
     with open(student_data_original, 'r', encoding='utf-8') as file:
         student_data= csv.DictReader(file, delimiter='\t')
         for student in student_data:
@@ -46,7 +46,7 @@ def print_full_data(): #imprime la información de todos los estudiantes
             print(f"\n#{student_number}\n   Nombre: {student['name']}\n   Clase: {student['student_class']}\n   Nota de Español: {student['spanish_grade']}\n   Nota de Ingles: {student['english_grade']}\n   Nota de Estudios sociales: {student['social_studies_grade']}\n   Nota de Ciencias: {student['science_grade']}\n   Promedio: {student['general_average']}")
 
 
-
+#TODO que sea con la lista p2
 def read_student_averages():
     student_data_original=Path(__file__).parent / 'student_data.csv'
 

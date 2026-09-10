@@ -1,15 +1,11 @@
-import data
-import time
-import os
-import menu
+import data, time, os, menu
 
+## Actions of saving/inputing student data
 
-## Acciones de guardar info de estudiantes
-
-def input_students():
+def input_students(students):
     os.system('cls' if os.name == 'nt' else 'clear')
     amount_of_students=0
-    #Titulo
+    #Title
     print("++++++++++++++++++++++++++++++++++++++++++++++ \n+++++++++++ Control de estudiantes +++++++++++ \n++++++++++++++++++++++++++++++++++++++++++++++ \n++++++++++                          ++++++++++ \n+++         Ingreso de información         +++")
 
     print("\n+++ Primero,  \n+ ¿Cuántos estudiantes se van a registrar?")
@@ -18,15 +14,14 @@ def input_students():
     except ValueError as err:
         print(f"++++++++++++++++++ ERROR +++++++++++++++++++++ \n+ El valor ingresado tiene que ser un número + \n+ Ingreso: {amount_of_students}              +")
         time.sleep(7)
-        input_students() #! Reinicia la sección por el error
+        input_students(students) #! Restarts section due to error
 
-    student_info(amount_of_students) #Va a guardar info
+    student_info(amount_of_students, students) #Goes to save info
 
-def student_info(amount_of_students):
+def student_info(amount_of_students, students):
     os.system('cls' if os.name == 'nt' else 'clear')
     print("++++++++++++++++++++++++++++++++++++++++++++++ \n+++++++++++ Control de estudiantes +++++++++++ \n++++++++++++++++++++++++++++++++++++++++++++++ \n++++++++++                          ++++++++++ \n+++         Ingreso de información         +++")
 
-    students=[]
 
     for i in range(amount_of_students):
         one_student={}
@@ -35,7 +30,7 @@ def student_info(amount_of_students):
         one_student['student_class']=input("+ Sección (ej. 11B):")
 
         print("+")
-        null_grade=-1 #Base de los grados, hace posible guardar después un valor
+        null_grade=-1 #Placeholder grade, makes it able to input an actual grade
 
         spanish_grade=student_grades(null_grade, "Español")
         english_grade=student_grades(null_grade, "Ingles")
@@ -52,10 +47,9 @@ def student_info(amount_of_students):
 
         students.append(one_student)
 
-    data.save_student_data(students)
     print("\n+ Se guardo la información de los estudiantes \n	       correctamente!")
     time.sleep(7)
-    menu.go_back_menu()
+    menu.go_back_menu(students)
 
 def student_grades(grade, class_of_grade):
     while grade<0 or grade>100:
@@ -70,12 +64,12 @@ def student_grades(grade, class_of_grade):
     return grade
 
 
-## Acciones de ver info de estudiantes
-
+## Action of viewing student grades
+##TODO students list/DICT leer en lugar del otro
 def view_student_info():
-    exit_info="" #Es lo que hace posible salir de la información e ir a el go_back_menu
+    exit_info="" #Is what makes it possible to get out of the information screen
 
-    while exit_info!="q":#Como exit_info no es q, hace posible esperar hasta que el usuario decida salir :3
+    while exit_info!="q":#Since exit info isn't q, makes it possible for the user to choose when to quit the screen :p
         os.system('cls' if os.name == 'nt' else 'clear')
 
         print("++++++++++++++++++++++++++++++++++++++++++++++ \n+++++++++++ Control de estudiantes +++++++++++ \n++++++++++++++++++++++++++++++++++++++++++++++ \n++++++++++                          ++++++++++ \n+++        Registro de estudiantes         +++")
@@ -89,14 +83,14 @@ def view_student_info():
 
 
 
-## Acciones de ver los top 3 promedios
+## Actions to view the top 3 students
 def top_three_students():
-    exit_info="" #Es lo que hace posible salir de la información e ir a el go_back_menu
+    exit_info="" #Is what makes it possible to get out of the information screen
 
     students_average, students_names, students_class= data.read_student_averages()
 
 
-    while exit_info!="q":#Como exit_info no es q, hace posible esperar hasta que el usuario decida salir :3
+    while exit_info!="q":#Since exit info isn't q, makes it possible for the user to choose when to quit the screen :p
         os.system('cls' if os.name == 'nt' else 'clear')
         print("++++++++++++++++++++++++++++++++++++++++++++++ \n+++++++++++ Control de estudiantes +++++++++++ \n++++++++++++++++++++++++++++++++++++++++++++++ \n++++++++++                          ++++++++++ \n+++            Top 3 Promedios             +++")
 
@@ -110,13 +104,13 @@ def top_three_students():
     menu.go_back_menu()
 
 
-## Acciones de ver todos los promedios
+## Actions to see only the averages
 def view_averages():
-    exit_info="" #Es lo que hace posible salir de la información e ir a el go_back_menu
+    exit_info="" #Is what makes it possible to get out of the information screen
 
     students_average, students_names, students_class= data.read_student_averages()
 
-    while exit_info!="q":#Como exit_info no es q, hace posible esperar hasta que el usuario decida salir :3
+    while exit_info!="q":#Since exit info isn't q, makes it possible for the user to choose when to quit the screen :p
         student_number=0
         os.system('cls' if os.name == 'nt' else 'clear')
         print("++++++++++++++++++++++++++++++++++++++++++++++ \n+++++++++++ Control de estudiantes +++++++++++ \n++++++++++++++++++++++++++++++++++++++++++++++ \n++++++++++                          ++++++++++ \n+++          Promedios Generales           +++")
