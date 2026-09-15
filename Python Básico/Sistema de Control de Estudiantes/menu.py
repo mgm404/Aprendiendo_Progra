@@ -2,24 +2,32 @@ import actions, data, os, time
 
 
 def menu(students):
-    student_data= data.read_student_data() #import student info (if none, blocks out options)
+    student_data=bool(students) #import student info (if false(empty), blocks out options)
     select=0
+    one_or_five=False #To verify if the option is 1 or 5 when there's no student data
 
     os.system('cls' if os.name == 'nt' else 'clear')
     #The title/welcome
     print("++++++++++++++++++++++++++++++++++++++++++++++ \n+++++++++++ Control de estudiantes +++++++++++ \n++++++++++++++++++++++++++++++++++++++++++++++ \n++++++++++                          ++++++++++ \n+++         ¿Que quiere hacer hoy?         +++")
 
 
-    if student_data==None: #Changes text depending on if there's student information
+    if student_data==False: #Changes text depending on if there's student information
         print("\n+ 1. Ingresar información de los estudiantes \n+ *2. Ver información de los estudiantes \n+ *3. Ver las top 3 notas promedio  \n+ *4. Ver las notas promedio generales \n+ 5. Importar registros anteriores \n+ *6. Exportar información de estudiantes")
-        print("\n++ OPCIÓNES 2-4 INVÁLIDAS  \n+ (no hay registro de estudiantes previo)")
+        print("\n++ OPCIÓNES 2-4 y 6 INVÁLIDAS  \n+ (no hay registro de estudiantes en uso)")
     else:
         print("\n+ 1. Ingresar información de los estudiantes \n+ 2. Ver información de los estudiantes \n+ 3. Ver las top 3 notas promedio  \n+ 4. Ver las notas promedio generales \n+ 5. Importar registros anteriores \n+ 6. Exportar información de estudiantes")
 
     try:
         select=int(input("++++ Selección: "))
 
-        if student_data==None and (select!=1 or select!=5): #Without information only option 1 and 5 are available
+        if select==1: #Verifying if selection is 1 or 5, not used if all options available
+            one_or_five=True
+        elif select==5:
+            one_or_five=True
+        else:
+            one_or_five=False
+
+        if student_data==False and one_or_five==False: #Without information only option 1 and 5 are available
             raise ValueError()
         elif select<1 or select>6:
             raise ValueError()
@@ -27,28 +35,31 @@ def menu(students):
     except ValueError as error:
         print("+++++++++++++++++++ ERROR ++++++++++++++++++++ \n+   	     Selección invalida        	     + \n+    Por favor seleccione una opción valida  + \n++++++++++++++++++++++++++++++++++++++++++++++")
         time.sleep(10)
-        menu()
+        menu(students)
 
     match select:
         case 1: #Input student information
             actions.input_students(students)
         case 2: #View student info (if there's any)
-            actions.view_student_info()
+            actions.view_student_info(students)
         case 3: #Top 3 best grades
-            actions.top_three_students()
+            actions.top_three_students(students)
         case 4: #View averages
-            actions.view_averages()
-        case 5: #Export the csv
+            actions.view_averages(students)
+        case 5: #Import the csv
+            actions.import_students(students)
+        case 6: #Export the csv
             data.save_student_data(students)
-        case 6: #Import the csv
-            data.import_students() #TODO hacer que halla una pantalla de ¿esta seguro que quiere usar informacion importada?
-            #TODO pq asi hace que el resto de varas SOLO usen esa información, haciendo el input, haría que se usara esa info y no la importada
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print("\n+ Se guardó la información correctamente!\n+ Borrando del programa la información...")
+            students=[]
+            time.sleep(7)
+            go_back_menu(students)
         case _: 
             #Empty case, in case the earlier checker didn't work
             print("+++++++++++++++++++ ERROR ++++++++++++++++++++ \n+   	     Selección invalida        	     + \n+    Por favor seleccione una opción valida  + \n++++++++++++++++++++++++++++++++++++++++++++++")
             time.sleep(10)
-            menu()
-
+            menu(students)
 
 
 ## Mini menu of exit or come back to the main menu
