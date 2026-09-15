@@ -36,6 +36,7 @@ def menu(students):
         print("+++++++++++++++++++ ERROR ++++++++++++++++++++ \n+   	     Selección invalida        	     + \n+    Por favor seleccione una opción valida  + \n++++++++++++++++++++++++++++++++++++++++++++++")
         time.sleep(10)
         menu(students)
+        return
 
     match select:
         case 1: #Input student information
@@ -60,6 +61,7 @@ def menu(students):
             print("+++++++++++++++++++ ERROR ++++++++++++++++++++ \n+   	     Selección invalida        	     + \n+    Por favor seleccione una opción valida  + \n++++++++++++++++++++++++++++++++++++++++++++++")
             time.sleep(10)
             menu(students)
+            return
 
 
 ## Mini menu of exit or come back to the main menu
