@@ -16,7 +16,7 @@ def input_students(students):
         print(f"++++++++++++++++++ ERROR +++++++++++++++++++++ \n+ El valor ingresado tiene que ser un número + \n+ Ingreso: {amount_of_students}              +")
         time.sleep(7)
         input_students(students)
-        #return #! Restarts section due to error
+        return #! Restarts section due to error
 
     student_info(amount_of_students, students) #Goes to save info
 
