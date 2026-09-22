@@ -2,7 +2,9 @@ import data, time, os, menu
 
 #Objects used
 class Student_list():
-    students=[]
+
+    students = []
+
     def get_student(self, student):
         self.students.append(student)
 
@@ -41,7 +43,7 @@ def input_students(student_list):
 def student_info(amount_of_students, student_list):
     os.system('cls' if os.name == 'nt' else 'clear')
     print("++++++++++++++++++++++++++++++++++++++++++++++ \n+++++++++++ Control de estudiantes +++++++++++ \n++++++++++++++++++++++++++++++++++++++++++++++ \n++++++++++                          ++++++++++ \n+++         Ingreso de información         +++")
-
+    student_list=Student_list()
 
     for i in range(amount_of_students):
         print(f"\n+++ Estudiante #{i+1}")
@@ -63,6 +65,8 @@ def student_info(amount_of_students, student_list):
         student_list.get_student(one_student)
 
     print("\n+ La información esta guardada! \n \n++ Para guardar la información permanentemente \n en el registro de estudiantes use la opción 6 \n en el menú principal")
+
+
     time.sleep(10)
     menu.go_back_menu(student_list)
 

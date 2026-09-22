@@ -2,7 +2,7 @@ import actions, data, os, time
 
 
 def menu(student_list):
-    student_data=bool(student_list) #import student info (if false(empty), blocks out options)
+    student_data=bool(student_list.students) #import student info (if false(empty), blocks out options)
     select=0
     one_or_five=False #To verify if the option is 1 or 5 when there's no student data
 

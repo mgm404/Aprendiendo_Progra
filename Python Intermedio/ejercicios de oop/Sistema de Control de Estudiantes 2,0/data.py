@@ -17,31 +17,31 @@ def save_student_data(student_list):
 
     student_data=Path(__file__).parent / 'student_data.csv'
 
-    student_data=object_to_dict(student_list)
+    students=object_to_dict(student_list)
 
     if file_exists==None:
         with open(student_data, 'w', encoding='utf-8', newline='') as csvfile:
-            headers = student_data[0].keys()
+            headers = students[0].keys()
 
             writer = csv.DictWriter(csvfile, fieldnames=headers, delimiter='\t') #**\t es tab
 
             writer.writeheader()
 
-            writer.writerows(student_data)
+            writer.writerows(students)
 
     else:
         with open(student_data, 'a', encoding='utf-8', newline='') as csvfile:
-            headers = student_data[0].keys()
+            headers = students[0].keys()
         
             writer = csv.DictWriter(csvfile, fieldnames=headers, delimiter='\t') #**\t es tab
         
-            writer.writerows(student_data)
+            writer.writerows(students)
 
 
-def object_to_dict(student_list): #Makes the student objects into a dictionary in order to save/use them correctly
+def object_to_dict(student_list): #Makes the student objects into a dictionary in order to save them correctly
     student_data=[]
     
-    for student in student_list:
+    for student in student_list.students:
         one_student={}
         one_student['name']=student.name
         one_student['student_class']=student.student_class
@@ -53,41 +53,40 @@ def object_to_dict(student_list): #Makes the student objects into a dictionary i
         one_student['general_average']=student.general_average
         
         student_data.append(one_student)
+    return student_data
 
 
 
 
 def print_full_data(student_list): #prints all the student information 
 
-    student_data=object_to_dict(student_list)
-
     student_number=0 #Used to give students a number
 
-    for student in student_data:
+    for student in student_list.students:
         student_number+=1
-        print(f"\n#{student_number}\n   Nombre: {student['name']}\n   Clase: {student['student_class']}\n   Nota de Español: {student['spanish_grade']}\n   Nota de Ingles: {student['english_grade']}\n   Nota de Estudios sociales: {student['social_studies_grade']}\n   Nota de Ciencias: {student['science_grade']}\n   Promedio: {student['general_average']}")
+        print(f"\n#{student_number}\n   Nombre: {student.name}\n   Clase: {student.student_class}\n   Nota de Español: {student.spanish_grade}\n   Nota de Ingles: {student.english_grade}\n   Nota de Estudios sociales: {student.social_studies_grade}\n   Nota de Ciencias: {student.science_grade}\n   Promedio: {student.general_average}")
 
 
 
 def read_student_averages(student_list):
-    student_data=object_to_dict(student_list)
+    student_data=student_list.students
 
-    sorted_student_data = sorted(student_data, key=operator.itemgetter('general_average'), reverse=True)
+    sorted_student_data = sorted(student_data, key=lambda x: x.general_average, reverse=True)
+    #sorted(student_data, key=operator.itemgetter('general_average'), reverse=True)
 
     students_names=[]
     students_class=[]
     students_average=[]
         
     for student in sorted_student_data:
-        students_names.append(student['name'])
-        students_class.append(student['student_class'])
-        students_average.append(student['general_average'])
+        students_names.append(student.name)
+        students_class.append(student.student_class)
+        students_average.append(student.general_average)
 
 
     return students_average, students_names, students_class
 
 
-#TODO PASAR DE DICT A OBJETO y usar student_list / student_list=actions.Student_list()
 def import_data():
     student_data_original=Path(__file__).parent / 'student_data.csv'
     
@@ -97,7 +96,7 @@ def import_data():
         for student in student_data:
             imported_data.append(student)
 
-    students=[]
+    student_list=actions.Student_list()
     for student in imported_data:
             st_name=student['name']
             st_class=student['student_class']
@@ -110,6 +109,6 @@ def import_data():
             
             one_student= actions.Student(st_name, st_class, spanish_grade, english_grade, social_studies_grade, science_grade, general_average)
             
-            students.append(one_student)
+            student_list.get_student(one_student)
 
-    return students
+    return student_list
