@@ -53,7 +53,7 @@ def menu(student_list):
             data.save_student_data(student_list)
             os.system('cls' if os.name == 'nt' else 'clear')
             print("\n+ Se guardó la información correctamente!\n+ Borrando del programa la información...")
-            student_list=actions.Student_list()
+            student_list=actions.StudentList()
             time.sleep(7)
             go_back_menu(student_list)
         case _: 

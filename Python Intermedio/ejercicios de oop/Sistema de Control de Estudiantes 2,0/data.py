@@ -96,19 +96,19 @@ def import_data():
         for student in student_data:
             imported_data.append(student)
 
-    student_list=actions.Student_list()
+    student_list=actions.StudentList()
     for student in imported_data:
             st_name=student['name']
             st_class=student['student_class']
             
-            spanish_grade=student['spanish_grade']
-            english_grade=student['english_grade']
-            social_studies_grade=student['social_studies_grade']
-            science_grade=student['science_grade']
-            general_average=student['general_average']
+            spanish_grade=int(student['spanish_grade'])
+            english_grade=int(student['english_grade'])
+            social_studies_grade=int(student['social_studies_grade'])
+            science_grade=int(student['science_grade'])
+            general_average=int(student['general_average'])
             
             one_student= actions.Student(st_name, st_class, spanish_grade, english_grade, social_studies_grade, science_grade, general_average)
             
-            student_list.get_student(one_student)
+            student_list.add_student(one_student)
 
     return student_list

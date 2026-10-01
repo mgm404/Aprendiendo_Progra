@@ -1,12 +1,13 @@
 import data, time, os, menu
 
 #Objects used
-class Student_list():
+class StudentList():
+    def __init__(self):
+        self.students = []
 
-    students = []
-
-    def get_student(self, student):
+    def add_student(self, student):
         self.students.append(student)
+
 
 
 class Student:
@@ -38,12 +39,12 @@ def input_students(student_list):
         input_students(student_list)
         return #! Restarts section due to error
 
-    student_info(amount_of_students, students) #Goes to save info
+    student_info(amount_of_students) #Goes to save info
 
-def student_info(amount_of_students, student_list):
+def student_info(amount_of_students):
     os.system('cls' if os.name == 'nt' else 'clear')
     print("++++++++++++++++++++++++++++++++++++++++++++++ \n+++++++++++ Control de estudiantes +++++++++++ \n++++++++++++++++++++++++++++++++++++++++++++++ \n++++++++++                          ++++++++++ \n+++         Ingreso de información         +++")
-    student_list=Student_list()
+    student_list=StudentList()
 
     for i in range(amount_of_students):
         print(f"\n+++ Estudiante #{i+1}")
@@ -62,7 +63,7 @@ def student_info(amount_of_students, student_list):
 
         one_student= Student(st_name, st_class, spanish_grade, english_grade, social_studies_grade, science_grade, general_average)
 
-        student_list.get_student(one_student)
+        student_list.add_student(one_student)
 
     print("\n+ La información esta guardada! \n \n++ Para guardar la información permanentemente \n en el registro de estudiantes use la opción 6 \n en el menú principal")
 
@@ -77,8 +78,8 @@ def student_grades(grade, class_of_grade):
 
             if grade<0 or grade>100:
                 raise ValueError()
-        except ValueError:
-            print("+++++++++++++++++++ ERROR ++++++++++++++++++++ \n+    El valor ingresado tiene que ser un     + \n+	   número entre 0 y 100              + \n+            Ingreso: {grade}                + \n+        Ingrese el valor correcto           + \n++++++++++++++++++++++++++++++++++++++++++++++")
+        except ValueError as e:
+            print(f"+++++++++++++++++++ ERROR ++++++++++++++++++++ \n+    El valor ingresado tiene que ser un     + \n+	   número entre 0 y 100              + \n+            Error: {e}                + \n+        Ingrese el valor correcto           + \n++++++++++++++++++++++++++++++++++++++++++++++")
 
     return grade
 
@@ -168,14 +169,14 @@ def import_students(student_list):
                 students=data.import_data()
                 print("\n+ Se importo la información de los estudiantes \n	       correctamente!")
                 time.sleep(7)
-                menu.go_back_menu(student_list)
+                menu.go_back_menu(students)
 
             elif import_info=="no" or import_info=="n": #Cancels operation
                 menu.go_back_menu(student_list)
             else:
                 raise ValueError()
-        except ValueError as error: #Restarts operation
-            print(f"\n+++++++++++++++++++ ERROR ++++++++++++++++++++ \n+    La opción ingresada no es Sí o No       + \n+            Ingreso: {import_info}                + \n+        Ingrese una opción valida           + \n++++++++++++++++++++++++++++++++++++++++++++++ \n+ (si desea salir del programa escoja que no)")
+        except ValueError: #Restarts operation
+            print(f"\n+++++++++++++++++++ ERROR ++++++++++++++++++++ \n+    La opción ingresada no es Sí o No       + \n+            Ingreso: {import_info}                + \n+        Ingrese una opción valida           + \n++++++++++++++++++++++++++++++++++++++++++++++")
             time.sleep(5)
             import_students(student_list)
             return

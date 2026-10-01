@@ -46,4 +46,4 @@ head = Head()
 
 torso = Torso(right_arm, left_arm, right_leg, left_leg, head)
 
-human = Human()
+human = Human(torso)
