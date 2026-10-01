@@ -1,7 +1,6 @@
 from pathlib import Path 
-import csv
-import operator
-import actions
+import csv, time
+import actions, menu
 
 def existing_student_data():
     student_data_original=Path(__file__).parent / 'student_data.csv'
@@ -86,6 +85,16 @@ def read_student_averages(student_list):
 
     return students_average, students_names, students_class
 
+def confirm_to_save_is_different(student_list):
+    existing_save= import_data()
+    for student in existing_save.students:
+        student_list.students.pop(student, None)
+    if bool(student_list.students)==False:
+        print("+++ No se pueden registrar estudiates ya registrados")
+        time.sleep(4)
+        menu.go_back_menu(student_list)
+    else:
+        save_student_data(student_list)
 
 def import_data():
     student_data_original=Path(__file__).parent / 'student_data.csv'
