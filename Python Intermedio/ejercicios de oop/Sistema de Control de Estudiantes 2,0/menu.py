@@ -48,7 +48,7 @@ def menu(student_list):
         case 4: #View averages
             actions.view_averages(student_list)
         case 5: #Import the csv
-            actions.import_students(student_list)
+            actions.confirm_to_save_is_different(student_list)
         case 6: #Export the csv
             data.save_student_data(student_list)
             os.system('cls' if os.name == 'nt' else 'clear')
