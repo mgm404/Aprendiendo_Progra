@@ -20,12 +20,17 @@ class Student:
         self.science_grade=science_grade
         self.general_average=general_average
 
+    def __eq__(self, student_2):
+        if self.name==student_2.name and self.student_class==student_2.student_class and self.spanish_grade==student_2.spanish_grade and self.english_grade==student_2.english_grade and self.social_studies_grade==student_2.social_studies_grade and self.science_grade==student_2.science_grade and self.general_average==student_2.general_average:
+            return True
+        else:
+            return False
+
 ## Actions of saving/inputing student data
 
 
 def input_students(student_list):
     os.system('cls' if os.name == 'nt' else 'clear')
-    students=[]
     amount_of_students=0
     #Title
     print("++++++++++++++++++++++++++++++++++++++++++++++ \n+++++++++++ Control de estudiantes +++++++++++ \n++++++++++++++++++++++++++++++++++++++++++++++ \n++++++++++                          ++++++++++ \n+++         Ingreso de información         +++")
@@ -39,12 +44,11 @@ def input_students(student_list):
         input_students(student_list)
         return #! Restarts section due to error
 
-    student_info(amount_of_students) #Goes to save info
+    student_info(amount_of_students, student_list) #Goes to save info
 
-def student_info(amount_of_students):
+def student_info(amount_of_students, student_list):
     os.system('cls' if os.name == 'nt' else 'clear')
     print("++++++++++++++++++++++++++++++++++++++++++++++ \n+++++++++++ Control de estudiantes +++++++++++ \n++++++++++++++++++++++++++++++++++++++++++++++ \n++++++++++                          ++++++++++ \n+++         Ingreso de información         +++")
-    student_list=StudentList()
 
     for i in range(amount_of_students):
         print(f"\n+++ Estudiante #{i+1}")
@@ -79,7 +83,7 @@ def student_grades(grade, class_of_grade):
             if grade<0 or grade>100:
                 raise ValueError()
         except ValueError as e:
-            print(f"+++++++++++++++++++ ERROR ++++++++++++++++++++ \n+    El valor ingresado tiene que ser un     + \n+	   número entre 0 y 100              + \n+            Error: {e}                + \n+        Ingrese el valor correcto           + \n++++++++++++++++++++++++++++++++++++++++++++++")
+            print(f"+++++++++++++++++++ ERROR ++++++++++++++++++++ \n+    El valor ingresado tiene que ser un     + \n+	   número entre 0 y 100              + \n+            Colocaste: {grade}                + \n+        Ingrese el valor correcto           + \n++++++++++++++++++++++++++++++++++++++++++++++")
 
     return grade
 
@@ -99,7 +103,6 @@ def view_student_info(student_list):
         exit_info=input("+ ")
 
     menu.go_back_menu(student_list)
-
 
 
 ## Actions to view the top 3 students

@@ -40,7 +40,7 @@ def save_student_data(student_list):
 def object_to_dict(student_list): #Makes the student objects into a dictionary in order to save them correctly
     student_data=[]
     
-    for student in student_list.students:
+    for student in student_list:
         one_student={}
         one_student['name']=student.name
         one_student['student_class']=student.student_class
@@ -87,14 +87,20 @@ def read_student_averages(student_list):
 
 def confirm_to_save_is_different(student_list):
     existing_save= import_data()
-    for student in existing_save.students:
-        student_list.students.pop(student, None)
-    if bool(student_list.students)==False:
+
+
+    students_to_save=[student for student in student_list.students if student not in existing_save.students]
+
+
+    #for student in existing_save.students:
+    #    student_list.students.pop(student)
+
+    if bool(students_to_save)==False:
         print("+++ No se pueden registrar estudiates ya registrados")
         time.sleep(4)
         menu.go_back_menu(student_list)
     else:
-        save_student_data(student_list)
+        save_student_data(students_to_save)
 
 def import_data():
     student_data_original=Path(__file__).parent / 'student_data.csv'
@@ -110,11 +116,11 @@ def import_data():
             st_name=student['name']
             st_class=student['student_class']
             
-            spanish_grade=int(student['spanish_grade'])
-            english_grade=int(student['english_grade'])
-            social_studies_grade=int(student['social_studies_grade'])
-            science_grade=int(student['science_grade'])
-            general_average=int(student['general_average'])
+            spanish_grade=float(student['spanish_grade'])
+            english_grade=float(student['english_grade'])
+            social_studies_grade=float(student['social_studies_grade'])
+            science_grade=float(student['science_grade'])
+            general_average=float(student['general_average'])
             
             one_student= actions.Student(st_name, st_class, spanish_grade, english_grade, social_studies_grade, science_grade, general_average)
             
