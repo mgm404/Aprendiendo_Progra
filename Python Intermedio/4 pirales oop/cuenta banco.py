@@ -11,18 +11,21 @@ class BankAccount():
         print(f"Ahora tu cuenta tiene: {self.balance}!")
 
 class SavingsAccount(BankAccount):
-    def __init__(self):
-        self.min_balance = 500
+    def __init__(self, min_balance):
+        self.min_balance = min_balance
         super().__init__(self.min_balance)
 
     def take_away_money(self, ammount):
-        if (self.balance - ammount)>=self.min_balance:
-            return super().take_away_money(ammount)
-        else:
-            print("No se puede retirar esa cantidad de dinero! La cuenta quedaría en menos de 500!")
+        try: 
+            if (self.balance - ammount)>=self.min_balance:
+                return super().take_away_money(ammount)
+            else:
+                raise ValueError()
+        except ValueError:
+            print(f"No se puede retirar esa cantidad de dinero! La cuenta quedaría en menos de {self.min_balance}!")
             return
 
-saving=SavingsAccount()
+saving=SavingsAccount(500)
 
 saving.add_money(250)
 saving.take_away_money(500)

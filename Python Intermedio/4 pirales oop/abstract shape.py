@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 import math
-class Shape():
+class Shape(ABC):
     @abstractmethod
     def calculate_perimeter():
         pass
