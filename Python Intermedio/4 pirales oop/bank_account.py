@@ -55,9 +55,9 @@ while retrive_money==False:
         if (saving.balance - amount)>=saving.min_balance:
             saving.take_away_money(amount)
             retrive_money=True
+            print(f"Ahora tu cuenta tiene: {saving.balance}!")
         else:
             raise ValueError()
 
     except ValueError:
         print(f"No se puede retirar {amount} ! La cuenta quedaría en menos del monto mínimo!\n Monto mínimo: {saving.min_balance}")
-print(f"Ahora tu cuenta tiene: {saving.balance}!")
