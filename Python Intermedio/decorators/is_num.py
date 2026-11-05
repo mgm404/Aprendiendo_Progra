@@ -2,12 +2,15 @@
 #los parámetros de la función que decore son números, y arroje una excepción de no ser así.
 import math
 def is_num(func):
-    def wrapper(num):
-        if type(num) != int:
-            raise ValueError(
-                "Solo se permiten números"
-                )
-        return func(num)
+    def wrapper(*args):
+        for num, arg in enumerate(args):
+            if isinstance(arg, (float, int)):
+                pass
+            else:
+                raise ValueError(
+                    "Solo se permiten números"
+                    )
+        return func(*args)
     return wrapper
 
 

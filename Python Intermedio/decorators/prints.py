@@ -3,7 +3,9 @@ import math
 
 def print_all(func):
     def wrapper(*args, **kwargs):
-        print(f"Function parameters:{args}, {kwargs} \nFunction result: {func(*args, **kwargs)}")
+        result= func(*args, **kwargs)
+        print(f"Function parameters:{args}, {kwargs} \nFunction result: {result}")
+        return result
     return wrapper
 
 
