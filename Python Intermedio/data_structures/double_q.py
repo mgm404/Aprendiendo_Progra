@@ -14,13 +14,13 @@ class DoubleEndedQueue:
 
         self.head.next=self.tail
 
-    #*push left, start
+    #push left, start
     def push_left(self, new_node):
         last_head=self.head
         new_node.next=last_head
         self.head=new_node
 
-    #*push right, end
+    #push right, end
     def push_right(self, new_node):
         if self.head.next == None:
             self.head.next=new_node
@@ -32,7 +32,7 @@ class DoubleEndedQueue:
 
     #*pop left, start
     def pop_left(self):
-        self.head=self.head.next #Takes out the head, nothing points to the eliminated value, because its the HEAD
+        self.head=self.head.next #Takes out the head, nothing points to the eliminated value
 
     #*pop right, end
     def pop_right(self):
